@@ -1,0 +1,12 @@
+<p>my-form works!</p>
+
+<form [formGroup]="personForm">
+  <label for="first-name">First Name: </label>
+  <input id="first-name" type="text" formControlName="firstName" required />
+  <br />
+  <label for="last-name">Last Name: </label>
+  <input id="last-name" type="text" formControlName="lastName" />
+  <br />
+  <button type="button">Submit</button>
+</form>
+<br />Value: {{ personForm?.value | json }}

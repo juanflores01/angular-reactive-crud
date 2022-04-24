@@ -17,6 +17,8 @@ export class MyTableComponent implements OnInit {
   }
 
   getPeople(): void {
-    this.people = this.personService.getPeople();
+    this.personService
+      .getPeople()
+      .subscribe((people) => (this.people = people));
   }
 }

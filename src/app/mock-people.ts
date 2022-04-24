@@ -6,4 +6,5 @@ export const PEOPLE: Person[] = [
   { id: 3, firstName: 'Bob', lastName: 'Smith' },
   { id: 4, firstName: 'Jose', lastName: 'Sanchez' },
   { id: 5, firstName: 'Nadine', lastName: 'Davis' },
+  { id: 6, firstName: 'Gabriel', lastName: 'Flores' },
 ];

@@ -13,7 +13,6 @@ export class MyFormComponent implements OnInit {
   personForm: FormGroup | any;
   person!: Person;
   pageTitle = 'My Form';
-  private sub!: Subscription; ////part of my second try
 
   constructor(
     private fb: FormBuilder,
@@ -28,25 +27,11 @@ export class MyFormComponent implements OnInit {
       lastName: new FormControl(''),
     });
 
-    this.getPerson(); /// First way of doing it.  works.
-
-    // Read the product Id from the route parameter /////Second way of doing it.  works.
-    this.sub = this.route.paramMap.subscribe((params) => {
-      const id = Number(this.route.snapshot.paramMap.get('id'));
-      this.getPerson2(id);
-    });
+    this.getPerson();
   }
 
-  // First way of doing it.  works.
   getPerson(): void {
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    this.personService
-      .getPerson(id)
-      .subscribe({ next: (person: Person) => this.displayPerson(person) });
-  }
-
-  // Second way of doing it.  works.
-  getPerson2(id: number): void {
     this.personService
       .getPerson(id)
       .subscribe({ next: (person: Person) => this.displayPerson(person) });

@@ -1,5 +1,6 @@
 <h2>My Table</h2>
 
 <li *ngFor="let person of people">
-  <span>{{ person.firstName }} {{ person.lastName }}</span>
+  <span>{{ person.firstName }} {{ person.lastName }}</span
+  >&nbsp;<button [routerLink]="['/my-form', person.id]">Edit</button>
 </li>

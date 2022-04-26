@@ -1,5 +1,5 @@
 <h2>My Form</h2>
-
+<p>{{ pageTitle }}</p>
 <form (ngSubmit)="addPerson()" [formGroup]="personForm">
   <label for="first-name">First Name: </label>
   <input id="first-name" type="text" formControlName="firstName" required />

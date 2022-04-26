@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Person } from 'src/person';
 import { PersonService } from '../person.service';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -12,10 +12,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class MyFormComponent implements OnInit {
   personForm: FormGroup | any;
   person!: Person;
+  pageTitle = 'My Form';
+  private sub!: Subscription; ////part of my second try
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
     private personService: PersonService
   ) {}
 
@@ -23,6 +26,47 @@ export class MyFormComponent implements OnInit {
     this.personForm = this.fb.group({
       firstName: new FormControl(''),
       lastName: new FormControl(''),
+    });
+
+    this.getPerson(); /// First way of doing it.  works.
+
+    // Read the product Id from the route parameter /////Second way of doing it.  works.
+    this.sub = this.route.paramMap.subscribe((params) => {
+      const id = Number(this.route.snapshot.paramMap.get('id'));
+      this.getPerson2(id);
+    });
+  }
+
+  // First way of doing it.  works.
+  getPerson(): void {
+    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
+    this.personService
+      .getPerson(id)
+      .subscribe({ next: (person: Person) => this.displayPerson(person) });
+  }
+
+  // Second way of doing it.  works.
+  getPerson2(id: number): void {
+    this.personService
+      .getPerson(id)
+      .subscribe({ next: (person: Person) => this.displayPerson(person) });
+  }
+
+  displayPerson(person: Person): void {
+    if (this.personForm) {
+      this.personForm.reset();
+    }
+
+    this.person = person;
+
+    if (this.person.id === 0) {
+      this.pageTitle = 'Add Person';
+    } else {
+      this.pageTitle = `Edit Person: ${this.person.firstName}`;
+    }
+    this.personForm.patchValue({
+      firstName: this.person.firstName,
+      lastName: this.person.lastName,
     });
   }
 

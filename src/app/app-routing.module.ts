@@ -6,6 +6,7 @@ import { MyFormComponent } from './my-form/my-form.component';
 const routes: Routes = [
   { path: '', redirectTo: '/my-table', pathMatch: 'full' },
   { path: 'my-form', component: MyFormComponent },
+  { path: 'my-form/:id', component: MyFormComponent },
   { path: 'my-table', component: MyTableComponent },
 ];
 

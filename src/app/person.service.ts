@@ -10,7 +10,15 @@ export class PersonService {
   constructor(private http: HttpClient) {}
   private peopleUrl = 'api/people';
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  };
+
   getPeople(): Observable<Person[]> {
     return this.http.get<Person[]>(this.peopleUrl);
+  }
+
+  createPerson(person: Person): Observable<Person> {
+    return this.http.post<Person>(this.peopleUrl, person, this.httpOptions);
   }
 }

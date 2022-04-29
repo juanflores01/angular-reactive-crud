@@ -31,7 +31,7 @@ export class PersonService {
       );
   }
 
-  // UpdatePerson(person: Person): Observable<Person> {
-  //   return this.http.put<Person>(this.peopleUrl, person, this.httpOptions);
-  // }
+  updatePerson(person: Person): Observable<Person> {
+    return this.http.put<Person>(this.peopleUrl, person, this.httpOptions);
+  }
 }

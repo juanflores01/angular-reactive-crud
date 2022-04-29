@@ -60,4 +60,11 @@ export class MyFormComponent implements OnInit {
     this.personService.createPerson(p).subscribe();
     this.router.navigate(['/my-table']);
   }
+
+  savePerson(): void {
+    // if (this.person) {
+    //   this.personService.updatePerson(this.person).subscribe();
+    // }
+    this.personService.updatePerson(this.person).subscribe();
+  }
 }

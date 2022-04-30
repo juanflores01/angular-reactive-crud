@@ -1,9 +1,7 @@
 <!-- add linkes here: -->
 <nav>
-  <a routerLink="/my-form">Person Form</a>
+  <a [routerLink]="['/my-form', '0']">Person Form</a>
   &nbsp;
   <a routerLink="/my-table">People Table</a>
 </nav>
 <router-outlet></router-outlet>
-<!-- <app-my-form></app-my-form>
-<app-my-table></app-my-table> -->

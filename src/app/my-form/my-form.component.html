@@ -1,6 +1,6 @@
 <h2>My Form</h2>
 <p>{{ pageTitle }}</p>
-<form (ngSubmit)="addPerson()" [formGroup]="personForm">
+<form (ngSubmit)="savePerson()" [formGroup]="personForm">
   <label for="first-name">First Name: </label>
   <input id="first-name" type="text" formControlName="firstName" required />
   <br />
@@ -9,5 +9,4 @@
   <br />
   <button type="submit">Submit</button>
 </form>
-<br />Value: {{ personForm?.value | json }} <br />adding this to check push to
-git.
+<br />Value: {{ personForm?.value | json }}

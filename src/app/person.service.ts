@@ -19,10 +19,14 @@ export class PersonService {
   }
 
   createPerson(person: Person): Observable<Person> {
+    person.id = null;
     return this.http.post<Person>(this.peopleUrl, person, this.httpOptions);
   }
 
   getPerson(id: number): Observable<Person> {
+    if (id === 0) {
+      return of(this.initializePerson());
+    }
     const url = `${this.peopleUrl}/${id}`;
     return this.http
       .get<Person>(url)
@@ -33,5 +37,13 @@ export class PersonService {
 
   updatePerson(person: Person): Observable<Person> {
     return this.http.put<Person>(this.peopleUrl, person, this.httpOptions);
+  }
+
+  private initializePerson(): Person {
+    return {
+      id: 0,
+      firstName: '',
+      lastName: '',
+    };
   }
 }

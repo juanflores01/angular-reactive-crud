@@ -55,16 +55,16 @@ export class MyFormComponent implements OnInit {
     });
   }
 
-  addPerson(): void {
-    const p = { ...this.person, ...this.personForm.value };
-    this.personService.createPerson(p).subscribe();
-    this.router.navigate(['/my-table']);
-  }
-
   savePerson(): void {
-    // if (this.person) {
-    //   this.personService.updatePerson(this.person).subscribe();
-    // }
-    this.personService.updatePerson(this.person).subscribe();
+    const p = { ...this.person, ...this.personForm.value };
+    if (p.id === 0) {
+      this.personService.createPerson(p).subscribe();
+      console.log('savePerson > createPerson');
+      this.router.navigate(['/my-table']);
+    } else {
+      this.personService.updatePerson(p).subscribe();
+      console.log('savePerson > updatePerson');
+      this.router.navigate(['/my-table']);
+    }
   }
 }

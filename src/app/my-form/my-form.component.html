@@ -6,7 +6,8 @@
   <br />
   <label for="last-name">Last Name: </label>
   <input id="last-name" type="text" formControlName="lastName" />
-  <br />
-  <button type="submit">Submit</button>
+  <br /><br />
+  <button type="submit">Submit</button><br /><br />
+  <button type="button" (click)="deletePerson()">Delete</button>
 </form>
 <br />Value: {{ personForm?.value | json }}

@@ -18,11 +18,6 @@ export class PersonService {
     return this.http.get<Person[]>(this.peopleUrl);
   }
 
-  createPerson(person: Person): Observable<Person> {
-    person.id = null;
-    return this.http.post<Person>(this.peopleUrl, person, this.httpOptions);
-  }
-
   getPerson(id: number): Observable<Person> {
     if (id === 0) {
       return of(this.initializePerson());
@@ -35,8 +30,18 @@ export class PersonService {
       );
   }
 
+  createPerson(person: Person): Observable<Person> {
+    person.id = null;
+    return this.http.post<Person>(this.peopleUrl, person, this.httpOptions);
+  }
+
   updatePerson(person: Person): Observable<Person> {
     return this.http.put<Person>(this.peopleUrl, person, this.httpOptions);
+  }
+
+  deletePerson(id: number): Observable<{}> {
+    const url = `${this.peopleUrl}/${id}`;
+    return this.http.delete<Person>(url, this.httpOptions);
   }
 
   private initializePerson(): Person {

@@ -60,11 +60,20 @@ export class MyFormComponent implements OnInit {
     if (p.id === 0) {
       this.personService.createPerson(p).subscribe();
       console.log('savePerson > createPerson');
-      this.router.navigate(['/my-table']);
+      this.onSaveComplete();
     } else {
       this.personService.updatePerson(p).subscribe();
       console.log('savePerson > updatePerson');
-      this.router.navigate(['/my-table']);
+      this.onSaveComplete();
     }
+  }
+
+  deletePerson(): void {
+    this.personService.deletePerson(this.person.id).subscribe();
+    this.onSaveComplete();
+  }
+
+  onSaveComplete(): void {
+    this.router.navigate(['/my-table']);
   }
 }

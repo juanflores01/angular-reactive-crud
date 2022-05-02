@@ -69,8 +69,17 @@ export class MyFormComponent implements OnInit {
   }
 
   deletePerson(): void {
-    this.personService.deletePerson(this.person.id).subscribe();
-    this.onSaveComplete();
+    if (this.person.id === 0) {
+      this.onSaveComplete();
+    } else if (this.person.id) {
+      if (
+        confirm(
+          `Are you sure you want to delete: ${this.person.firstName} ${this.person.lastName}?`
+        )
+      )
+        this.personService.deletePerson(this.person.id).subscribe();
+      this.onSaveComplete();
+    }
   }
 
   onSaveComplete(): void {

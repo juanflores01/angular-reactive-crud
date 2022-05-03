@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { Observable, Subscription } from 'rxjs';
 import { Person } from 'src/person';
 import { PersonService } from '../person.service';
@@ -23,8 +28,8 @@ export class MyFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.personForm = this.fb.group({
-      firstName: new FormControl(''),
-      lastName: new FormControl(''),
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.maxLength(50)]],
     });
 
     this.getPerson();

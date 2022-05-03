@@ -2,12 +2,46 @@
 <p>{{ pageTitle }}</p>
 <form (ngSubmit)="savePerson()" [formGroup]="personForm">
   <label for="first-name">First Name: </label>
-  <input id="first-name" type="text" formControlName="firstName" required />
+  <input
+    id="first-name"
+    type="text"
+    formControlName="firstName"
+    [ngClass]="{
+      'is-invalid':
+        (personForm.get('firstName').touched ||
+          personForm.get('firstName').dirty) &&
+        !personForm.get('firstName').valid
+    }"
+  />
+  <span class="invalid-feedback"
+    ><span *ngIf="personForm.get('firstName').errors?.required"
+      >Please enter your first name.</span
+    ></span
+  >
   <br />
   <label for="last-name">Last Name: </label>
-  <input id="last-name" type="text" formControlName="lastName" />
+  <input
+    id="last-name"
+    type="text"
+    formControlName="lastName"
+    [ngClass]="{
+      'is-invalid':
+        (personForm.get('lastName').touched ||
+          personForm.get('lastName').dirty) &&
+        !personForm.get('lastName').valid
+    }"
+  />
+  <span class="invalid-feedback"
+    ><span *ngIf="personForm.get('lastName').errors?.required"
+      >Please enter your last name name.</span
+    ></span
+  >
   <br /><br />
-  <button type="submit">Submit</button><br /><br />
+  <button type="submit" [disabled]="!personForm.valid">Submit</button
+  ><br /><br />
   <button type="button" (click)="deletePerson()">Delete</button>
 </form>
-<br />Value: {{ personForm?.value | json }}
+<br />
+Dirty: {{ personForm.dirty }} <br />
+Touched: {{ personForm.touched }} <br />
+Valid:{{ personForm.valid }} <br />Value: {{ personForm?.value | json }}
